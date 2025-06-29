@@ -6,10 +6,12 @@ const listHours = document.getElementById('hours')
 
 export function hoursLoad({ date }) {
     const opening = openingHours.map((hour) => {
+        listHours.innerHTML = ''
+
         // Recupera somente a hora
         const [scheduleHour] = hour.split(':')
 
-        // Adiciona a hora na data e verifica se está no passado
+        // Adiciona a hora na data e verifica se está no futuro
         const isHourPast = dayjs(date).add(scheduleHour, 'hour').isAfter(dayjs())
 
         // Define se o horário está disponível
@@ -25,14 +27,13 @@ export function hoursLoad({ date }) {
 
         li.classList.add('hour')
         li.classList.add(available ? 'hour-available' : 'hour-unavailable')
-
         li.textContent = hour
 
         if(hour === '9:00') {
             hourHeaderAdd('Manhã')
         } else if(hour === '13:00') {
             hourHeaderAdd('Tarde')
-        } else if (hour === '18:00') {
+        } else if (hour === '19:00') {
             hourHeaderAdd('Noite')
         }
 
@@ -48,5 +49,4 @@ function hourHeaderAdd(title) {
     header.textContent = title
 
     listHours.append(header)
-    
 }
