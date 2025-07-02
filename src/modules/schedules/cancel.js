@@ -16,9 +16,9 @@ periods.forEach((period) => {
                     const isConfirm = confirm('Tem certeza que deseja cancelar o agendamento ?')
     
                     if(isConfirm) {
-                        schedulesDay()
-                        
                         await scheduleCancel({ id })
+                        
+                        schedulesDay()
                     }
                 }
             }
