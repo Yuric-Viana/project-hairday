@@ -4,7 +4,11 @@ import { hourClick } from './hour-click.js'
 
 const listHours = document.getElementById('hours')
 
-export function hoursLoad({ date }) {
+export function hoursLoad({ date, dailySchedules }) {
+    listHours.innerHTML = ''
+
+    const unavailableHours = dailySchedules.map((hour) => dayjs(hour.when).format('HH:mm'))
+
     const opening = openingHours.map((hour) => {
         listHours.innerHTML = ''
 
@@ -12,32 +16,34 @@ export function hoursLoad({ date }) {
         const [scheduleHour] = hour.split(':')
 
         // Adiciona a hora na data e verifica se está no futuro
-        const isHourPast = dayjs(date).add(scheduleHour, 'hour').isAfter(dayjs())
+        const isHourPresent = dayjs(date).add(scheduleHour, 'hour').isBefore(dayjs())
+
+        const available = !unavailableHours.includes(hour) && !isHourPresent
 
         // Define se o horário está disponível
         return {
             hour,
-            available: isHourPast
+            available
         }
-    })    
+    })
 
     // Renderiza os horários
-    opening.forEach(({hour, available}) => {
+    opening.forEach(({ hour, available }) => {
         const li = document.createElement('li')
 
         li.classList.add('hour')
         li.classList.add(available ? 'hour-available' : 'hour-unavailable')
         li.textContent = hour
 
-        if(hour === '9:00') {
+        if (hour === '9:00') {
             hourHeaderAdd('Manhã')
-        } else if(hour === '13:00') {
+        } else if (hour === '13:00') {
             hourHeaderAdd('Tarde')
         } else if (hour === '19:00') {
             hourHeaderAdd('Noite')
         }
 
-        listHours.append(li)        
+        listHours.append(li)
     })
 
     hourClick()

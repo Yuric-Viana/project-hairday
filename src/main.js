@@ -11,5 +11,4 @@ import './styles/schedule.css'
 // Importação dos arquivos Java Scripts
 import './modules/form/submit.js'
 import './modules/form/date-change.js'
-
 import './modules/page-load.js' 

@@ -15,30 +15,33 @@ selectedDate.min = inputToday
 form.onsubmit = async (event) => {
     event.preventDefault()
 
+    selectedDate.value = inputToday
+    clientName.value = ''
+
     try {
         // Recupera o nome do cliente
         const name = clientName.value.trim()
 
-        if(!name) {
+        if (!name) {
             return alert('Insira o nome do cliente!')
         }
 
         // Recupera o horário selecionado
         const hourSelected = document.querySelector('.hour-selected')
-        
+
         // Recupera o horário selecionado
-        if(!hourSelected) {
+        if (!hourSelected) {
             return alert('Você deve selecionar um horário!')
         }
 
         // Recupera somente a hora
         const [hour] = hourSelected.innerText.split(':')
-        
+
         // Insere a hora na data
         const when = dayjs(selectedDate.value).add(hour, 'hour')
-        
+
         const id = new Date().getTime()
-    
+
         await scheduleNew({
             id,
             name,
