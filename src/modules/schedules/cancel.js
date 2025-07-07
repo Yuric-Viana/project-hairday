@@ -10,7 +10,6 @@ periods.forEach((period) => {
                 const item = event.target.closest('li')
                 
                 const { id } = item.dataset
-                console.log(item, id);
     
                 if(id) {
                     const isConfirm = confirm('Tem certeza que deseja cancelar o agendamento ?')

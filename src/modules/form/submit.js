@@ -38,7 +38,7 @@ form.onsubmit = async (event) => {
         // Insere a hora na data
         const when = dayjs(selectedDate.value).add(hour, 'hour')
 
-        const id = new Date().getTime()
+        const id = String(new Date().getTime())
 
         // Faz o agendamento enviando os dados para API
         await scheduleNew({
