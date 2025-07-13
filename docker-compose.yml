@@ -1,0 +1,9 @@
+services:
+  hairday-app:
+    build: .
+    image: hairday-app
+    container_name: hairday-container
+    ports:
+      - "3000:3000"
+      - "3333:3333"
+    restart: unless-stopped

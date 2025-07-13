@@ -7,7 +7,7 @@ const listHours = document.getElementById('hours')
 export function hoursLoad({ date, dailySchedules }) {
     listHours.innerHTML = ''
 
-    const unavailableHours = dailySchedules.map((hour) => dayjs(hour.when).format('HH:mm'))
+    const unavailableHours = dailySchedules.map((hour) => dayjs(hour.when).format('HH:mm')) 
 
     const opening = openingHours.map((hour) => {
         listHours.innerHTML = ''
@@ -18,7 +18,7 @@ export function hoursLoad({ date, dailySchedules }) {
         // Adiciona a hora na data e verifica se está no futuro
         const isHourPresent = dayjs(date).add(scheduleHour, 'hour').isBefore(dayjs())
 
-        const available = !unavailableHours.includes(hour) && !isHourPresent
+        const available = !String(unavailableHours).includes(hour) && !isHourPresent        
 
         // Define se o horário está disponível
         return {
